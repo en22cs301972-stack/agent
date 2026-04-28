@@ -1,0 +1,19 @@
+{
+  "name": "web-builder-agent",
+  "version": "1.0.0",
+  "description": "Single-prompt personal website builder agent that outputs static HTML/CSS/JS.",
+  "main": "src/builder.js",
+  "bin": {
+    "web-builder-agent": "bin/web-builder-agent.js"
+  },
+  "scripts": {
+    "start": "node bin/web-builder-agent.js",
+    "test": "node scripts/self-test.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "engines": {
+    "node": ">=18"
+  }
+}
