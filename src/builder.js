@@ -35,7 +35,8 @@ const TONE_KEYWORDS = [
   { tone: 'minimal', keywords: ['minimal', 'clean', 'simple'] },
   { tone: 'playful', keywords: ['playful', 'fun', 'vibrant'] },
   { tone: 'bold', keywords: ['bold', 'strong', 'confident'] },
-  { tone: 'friendly', keywords: ['friendly', 'warm', 'approachable'] }
+  { tone: 'warm', keywords: ['warm'] },
+  { tone: 'friendly', keywords: ['friendly', 'approachable'] }
 ];
 
 function buildSite(prompt, options = {}) {
@@ -110,12 +111,15 @@ function parsePromptLines(prompt) {
     .filter(Boolean);
 
   for (const line of lines) {
-    const match = line.match(/^([a-zA-Z ]+):\s*(.+)$/);
-    if (!match) {
+    const separatorIndex = line.indexOf(':');
+    if (separatorIndex <= 0) {
       continue;
     }
-    const rawKey = match[1].toLowerCase();
-    const value = match[2].trim();
+    const rawKey = line.slice(0, separatorIndex).trim().toLowerCase();
+    const value = line.slice(separatorIndex + 1).trim();
+    if (!rawKey || !value) {
+      continue;
+    }
     const key = normalizeKey(rawKey);
     if (key) {
       data[key] = value;
